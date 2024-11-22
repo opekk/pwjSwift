@@ -7,7 +7,7 @@
 
 import Foundation
 
-func zadanie1(){
+func zadanie2_1(){
     print("podaj dlugosc boku szescianu: ")
     let bokSzescianu = Double(readLine()!)!
     let poleSzescianu: Double = 6 * pow(bokSzescianu,2)
@@ -18,7 +18,7 @@ func zadanie1(){
     else { print("zla wartosc") }
 }
 
-func zadanie2(){
+func zadanie2_2(){
     
     print("podaj cene listwy.")
     let cenaListwy: Double = Double(readLine()!)!
@@ -44,7 +44,7 @@ func zadanie2(){
 }
 
 
-func zadanie3(){
+func zadanie2_3(){
     var suma: Int = 0
     for _ in 1...3{
         var randomLiczba = Int.random(in:1...9)
@@ -54,7 +54,7 @@ func zadanie3(){
     print("Suma wylosowanych liczb to: ", String(suma))
 }
 
-func zadanie4(){
+func zadanie2_4(){
     var srednia: Double
     var sumaOcen: Double = 0
     var sumaWag: Int = 0
@@ -77,7 +77,7 @@ func zadanie4(){
     
 }
 
-func zadanie5(){
+func zadanie2_5(){
     let string1 = "Napis jednolionowy"
     let string2 = """
     Napis
@@ -87,12 +87,12 @@ func zadanie5(){
     print("Napis dwuliniowy: ", string2)
 }
 
-func zadanie6(){
+func zadanie2_6(){
     let string = "\t Nauka kodowania to nie tylko nauka jezyka technologii \n \n \t To odkrywanie nowych sposobow myslenia \n \n \t i urzeczywistnianie rozmaitych koncepcji. \n"
     print(string)
 }
 
-func zadanie7(){
+func zadanie2_7(){
     var name: String = ""
     var secondName: String = ""
     var surname: String = ""
