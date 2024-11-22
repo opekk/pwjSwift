@@ -8,7 +8,7 @@
 import Foundation
 
 
-func zad1(){
+func zad4_1(){
     var next = 0
     let licz = Int(readLine()!)!    // wartosc
     var zmienna = 0
@@ -34,7 +34,7 @@ func zad1(){
     
 }
 
-func zad2(){
+func zad4_2(){
     var number = Int(readLine()!)!
     var temp = 0
     
@@ -47,7 +47,7 @@ func zad2(){
     else {print("liczba jest pierwsza.")}
     }
 
-func zad3(){
+func zad4_3(){
     
     let ciag = Int(readLine()!)!
     let stringCiag = String(ciag)
@@ -67,7 +67,7 @@ func zad3(){
 
 }
 
-func zad4(){
+func zad4_4(){
     let ciag = readLine()!
     var temp1 = 0
     let temp2 = ciag.count
@@ -97,4 +97,3 @@ func zad5(){
     print("min: ", min)
 }
 
-zad2()
