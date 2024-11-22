@@ -138,4 +138,3 @@ func zadanie2_7(){
     }
    
 }
-zadanie7()
