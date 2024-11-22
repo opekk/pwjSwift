@@ -7,7 +7,7 @@
 
 import Foundation
 
-func zad1(){
+func zad3_1(){
     
     var ciag: String = readLine()!
     var char: Character = readLine()!.first!
@@ -28,7 +28,7 @@ func zad1(){
     }
 }
 
-func zad2(){
+func zad3_2(){
     var ciag1: String = readLine()!
     var ciag2: String = readLine()!
     var prefiks: String = readLine()!
@@ -47,7 +47,7 @@ func zad2(){
     }
 }
 
-func zad3(){
+func zad3_3(){
     let year = Int(readLine()!)!
     
     if (year.isMultiple(of: 4) && !year.isMultiple(of: 100) || year.isMultiple(of: 400)){
@@ -58,7 +58,7 @@ func zad3(){
         
 }
 
-func zad4(){
+func zad3_4(){
     
     let year = String(readLine()!)
     if Int(year)! >= 2 && Int(year)! <= 3010{
@@ -74,9 +74,17 @@ func zad4(){
     
 }
 
+func zad4(){
+    
+}
+
 func zad5(){
     
 
+}
+
+func zad6(){
+    
 }
 
 
