@@ -1,13 +1,13 @@
 import Foundation
 
-func zad1(){
+func zad5_1(){
     let tab: [Int] = Array(repeating: 1, count: 12)     // 1 zamiast 1.0 (1.0 to typ double, 1 to typ int)
     for i in tab {
         print(i)
     }
 }
 
-func zad2(){
+func zad5_2(){
     var tab: [Int] = []
     
     for _ in 1...10 {
@@ -21,7 +21,7 @@ func zad2(){
     
 }
 
-func zad3(){
+func zad5_3(){
     var tab: [Int] = []
     var n = Int(readLine()!)!
     if n > 0 {
@@ -36,25 +36,37 @@ func zad3(){
     }
 }
 
-func zad4(){
+func zad5_4(){
     let n = Int.random(in: 3...100)
     var tab: [Int]  = []
-    var prod: Double = 1
+    var prodGeometryczna: Double = 1
+    var prodHarmoniczna: Double = 0
     var j = 1
 
     for i in 0..<n {
         var x = Int.random(in: 3...100)
-        if i % 2 == 1 {prod *= prod; j += 1}
         tab.append(x)
     }
+    
+    for i in 0..<n{
+        prodHarmoniczna += 1.0 / Double(tab[i])
+        if i % 2 == 1 { prodGeometryczna *= Double(tab[i]) }
+    }
+    
     let sredniaA = Double(tab.reduce(0,+)) / Double(tab.count)
-    let sredniaW = 0
-    let sredniaH = 0
+    let sredniaW = pow(prodGeometryczna, 1.0 / Double(n))
+    
+    prodHarmoniczna = pow(prodHarmoniczna, Double(n))
+    let sredniaH = Double(n) / Double(prodHarmoniczna)
+    
+    print("Srednia artmetyczna: \(sredniaA)")
+    print("Srednia geometryczna: \(String(format:"%.2f",sredniaW))")
+    print("Srednia harmoniczna: \(sredniaH)")
     
     
 }
 
-func zad5(){
+func zad5_5(){
     guard let n  = Int(readLine()!), n > 0 else{ fatalError("zla liczba")}
     var tab1: [Int] = [], tab2: [Int] = []
     for _ in 1...n {
@@ -68,18 +80,7 @@ func zad5(){
     
 }
 
-func zad6(){
-    var tab: [Int] = []
-    var ans: [Int] = []
-    let n = Int(readLine()!)!
-    for _ in 1...n {
-        let x = Int(readLine()!)!
-        tab.append(x)
-    }
-    print(ans)
-    
-}
-zad6()
 
 
-// 4 i 6 do zrobienia
+
+// 6 do zrobienia
