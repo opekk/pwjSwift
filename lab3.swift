@@ -9,9 +9,9 @@ import Foundation
 
 func zad3_1(){
     
-    var ciag: String = readLine()!
-    var char: Character = readLine()!.first!
-    var index: Int = Int(readLine()!)!
+    let ciag: String = readLine()!
+    let char: Character = readLine()!.first!
+    let index: Int = Int(readLine()!)!
     
     
     if (ciag[ciag.startIndex] == char){
@@ -29,10 +29,10 @@ func zad3_1(){
 }
 
 func zad3_2(){
-    var ciag1: String = readLine()!
-    var ciag2: String = readLine()!
-    var prefiks: String = readLine()!
-    var suffiks: String = readLine()!
+    let ciag1: String = readLine()!
+    let ciag2: String = readLine()!
+    let prefiks: String = readLine()!
+    let suffiks: String = readLine()!
     
     if(ciag1 == ciag2){
         print("sa idnetyczne.")
@@ -74,23 +74,55 @@ func zad3_4(){
     
 }
 
-func zad4(){
+
+func zad3_5(){
+    let srednia = Double(readLine()!)!
+    var stypendium: Int
+    
+    switch srednia{
+    case _ where srednia >= 4.5: stypendium = 200
+    case _ where srednia >= 4.0 && srednia < 4.5: stypendium = 150
+    case _ where srednia >= 3.5 && srednia < 4.0: stypendium = 100
+    case _ where srednia < 3.0: stypendium = 0
+    default: stypendium = 0
+    }
     
 }
 
-func zad5(){
-    
 
+
+func zad3_6(){
+    print("podaj liczbe1: ")
+    let liczba1 = Int(readLine()!)!
+    print("podaj liczbe2: ")
+    let liczba2 = Int(readLine()!)!
+    print("podaj wartosc: 1 - dodawanie, 2 - odejmowanie, 3 - mnozenie, 4 - dzielenie: ")
+    let wybor = readLine()!
+    switch wybor{
+    case "1": print(liczba1 + liczba2)
+    case "2": print(liczba1 - liczba2)
+    case "3": print(liczba1 * liczba2)
+    case "4": if(liczba2 != 0) { print(liczba1 / liczba2) }
+        else { print("nie mozna dzielic przez 0") }
+    default: print("nie ma takiej opcji")
+        
+    }
+    
 }
 
-func zad6(){
-    
-}
 
-
-func zad7(){
+func zad3_7(){
+    print("podaj znak: ")
     let char = Character(readLine()!)
+    let samogloski = ["a", "e", "i", "o", "u", "y"]
+    let spolgloski = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"]
+    
+    switch true {
+        case samogloski.contains(String(char)): print("to jest samogloska")
+        case spolgloski.contains(String(char)): print("to jest spolgloska")
+        case char.isNumber: print("to jest liczba")
+        default: print("to jest inny znak")
+    }
     
 }
 
-zad3()
