@@ -53,16 +53,59 @@ func macierzSymetryczna(macierz: [[Int]]) -> Bool{      //6.2.1
     return rows == cols
 }
 
-func
+func 
+
+
+
+func macierzNorma(macierz: [[Int]]) -> Double{      // 6.2.3
+    
+    var suma: Double = 0
+    
+    for i in 0..<macierz.count{
+        for j in 0..<macierz[i].count {
+            suma += pow(Double(macierz[i][j]),2)
+        }
+    }
+    return Double(suma).squareRoot()
+}
+
+
+func macierzDiagonalna(macierz: [[Int]]) -> Bool{      //6.2.5
+    var rows = macierz.count
+    var cols = macierz[0].count
+    if rows != cols {return false}
+    
+    for i in 0..<rows {
+        if macierz[i][i] == 0  {
+            return false
+        }
+    }
+    return true
+}
+
+func macierzPrzekatnaDominujacaGlowna(macierz: [[Int]]) -> Bool{    // 6.2.6
+    var rows = macierz.count
+    var cols = macierz[0].count
+    var suma = 0
+    if rows != cols {return false}
+    
+    for i in 1..<rows {
+        suma += macierz[i][i]
+        }
+    return macierz[0][0] > suma
+}
+
 
 
 
 func zad6_2() {
 
-    let mac: [[Int]] = [[10, 20, 30], [40, 50, 60],[40, 50, 60],[40, 50, 60]]
+    let mac: [[Int]] = [[1, 2, 3], [4, 5, 6],[7,8,9]]
     
     print(macierzSymetryczna(macierz: mac))
-    
+    print(macierzNorma(macierz: mac))
+    print(macierzDiagonalna(macierz: mac))
+    print(macierzPrzekatnaDominujacaGlowna(macierz: mac))
     
     
 }
