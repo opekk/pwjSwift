@@ -27,24 +27,27 @@ func zad8_1(){
         return (a.re - b.re, a.im - b.im)
     }
     func mnozenieLiczbZespolonych(a: LiczbaZespolona, b: LiczbaZespolona) -> (Double, Double){
-        
         return (a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re)
     }
     
     let imNum1 = LiczbaZespolona(re: 7.0, im: 5.0)
     let imNum2 = LiczbaZespolona(re: 4.0, im: 3.0)
-   
-    let sum = dodwanieLiczbZespolonych(a: imNum1, b: imNum2)
-    let diff = odejmowanieLiczbZespolonych(a: imNum1, b: imNum2)
-    let prod = mnozenieLiczbZespolonych(a: imNum1, b: imNum2)
+    print("1 - dodawanie, 2 - odjemowanie, 3 - mnozenie: ")
+    let choice = Int(readLine()!)!
     
-    
-    print("suma: \(sum)")
-    print("odejmowanie: \(diff)")
-    print("mnozenie: \(prod)")
-    
-    // menu
-   
+    switch choice{
+    case 1:
+        let sum = dodwanieLiczbZespolonych(a: imNum1, b: imNum2)
+        print("suma: \(sum)")
+    case 2:
+        let diff = odejmowanieLiczbZespolonych(a: imNum1, b: imNum2)
+        print("roznica: \(diff)")
+    case 3:
+        let prod = mnozenieLiczbZespolonych(a: imNum1, b: imNum2)
+        print("iloczyn: \(prod)")
+    default: print("nie ma takiej opcji")
+        
+    }
 }
 
 
