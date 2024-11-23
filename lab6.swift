@@ -46,7 +46,24 @@ func zad6_1() {
     print("szukana: \(szuakna)")
 }
 
+
+func macierzSymetryczna(macierz: [[Int]]) -> Bool{      //6.2.1
+    var rows = macierz.count
+    var cols = macierz[0].count
+    return rows == cols
+}
+
+func
+
+
+
 func zad6_2() {
+
+    let mac: [[Int]] = [[10, 20, 30], [40, 50, 60],[40, 50, 60],[40, 50, 60]]
+    
+    print(macierzSymetryczna(macierz: mac))
+    
+    
     
 }
 
