@@ -55,22 +55,21 @@ func zad8_2(){
     
     struct rzutOszczepem: Hashable{
         var ID: String;
-        let proby: [Double]
+        var proba1: Double
+        var proba2: Double
+        var proba3: Double
         var srednia: Double
         
-        init(ID: String, proby: [Double], srednia: Double) {
+        init(ID: String, proba1: Double, proba2: Double, proba3: Double) {
             self.ID = ID
-            self.proby = []
-            self.srednia = 0
+            self.proba1 = proba1
+            self.proba2 = proba2
+            self.proba3 = proba3
+            self.srednia = (self.proba1 + self.proba2 + self.proba3) / 3.0
         }
     }
     
-    func sredniaZProb(proby: [Double]) -> Double{
-        return proby.reduce(0, +) / Double(proby.count)
-    }
-    
-    
-    var setRzutOszczepem: Set<rzutOszczepem> = []
+    var tablica: [(rzutOszczepem, Double)] = []
     
     for i in 0...3{
         print("podaj ID:")
@@ -81,13 +80,55 @@ func zad8_2(){
         let proba2 = Double(readLine()!)!
         print("podaj proba3:")
         let proba3 = Double(readLine()!)!
-        setRzutOszczepem.insert(rzutOszczepem(ID: ID, proby: [proba1, proba2, proba3], srednia: sredniaZProb(proby: [proba1, proba2, proba3])))
-    
+        var uczestnik = rzutOszczepem.init(ID: ID, proba1: proba1, proba2: proba2, proba3: proba3)
+        var srednia = uczestnik.srednia
+        tablica.append((uczestnik, uczestnik.srednia))
     }
     
+    var max = 0
+    var min = 0
+    for i in 0..<tablica.count{
+        if tablica[i].1 > tablica[0].1{
+            max = i
+        }
+        if tablica[i].1 < tablica[0].1{
+            min = i       }
+    }
     
-    print(setRzutOszczepem)
+    print("Usunieto uczestnika: \(tablica[min])")
+    tablica.remove(at: min)
+    print("Maksymalna srednia: \(tablica[max])")
+    
+}
+    
+
+func zad8_3(){
+    
+}
+
+
+func zad8_4(){
+    
+    var studenci: [String: String] = [:]
+    
+    for i in 0..<5 {
+        print("Podaj id studenta: ")
+        var studentID: String = readLine()!
+        print("Podaj nazwisko studenta: ")
+        var studentNazwisko: String = readLine()!
+        studenci[studentID] = studentNazwisko
+    }
+    print("Podaj id studenta")
+    var szukanyStudentID: String = readLine()!
+    print("Podaj nazwisko studenta")
     
     
+    
+    
+    print(studenci.reversed())
+    
+}
+
+func zad8_5(){
     
 }
