@@ -1,9 +1,3 @@
-//
-//  main.swift
-//  swiftLaby
-//
-//  Created by Maciek on 22/11/2024.
-//
 import Foundation
 
 
@@ -27,6 +21,11 @@ func zad6_1() {
     let szukana = Int(readLine()!)!
     var max = arr[0][0]
     var min = arr[0][0]
+    var maxIndexRow: Int = 0
+    var maxIndexCol: Int = 0
+    var minIndexRow: Int = 0
+    var minIndexCol: Int = 0
+    
     
     for row in 0..<i {
         for column in 0..<j {
@@ -35,17 +34,20 @@ func zad6_1() {
             }
             if arr[row][column] > max {
                 max = arr[row][column]
-                }
+                maxIndexRow = row
+                maxIndexCol = column
+            }
             if arr[row][column] < min {
                 min = arr[row][column]
+                minIndexCol = column
+                maxIndexCol = row
             }
         }
     }
-    print("max: \(max)")
-    print("min: \(min)")
+    print("max: \(max) \nmaxIndexRow: \(maxIndexRow) \nmaxIndexCol: \(maxIndexCol)")
+    print("min: \(min) \nminIndexRow: \(minIndexRow) \nminIndexCol: \(minIndexCol)")
     print("szukana: \(szuakna)")
 }
-
 
 func macierzSymetryczna(macierz: [[Int]]) -> Bool{      //6.2.1
     var rows = macierz.count
@@ -53,14 +55,18 @@ func macierzSymetryczna(macierz: [[Int]]) -> Bool{      //6.2.1
     return rows == cols
 }
 
-func 
-
+//6.2.2
+func macierzSumaWiersza(macierz: [[Int]], wiersz: Int) -> (Int, Int){
+    var sumaWiersza: Int = 0
+    for i in 0..<macierz[wiersz].count {
+        sumaWiersza += macierz[wiersz][i]
+    }
+    return (sumaWiersza, macierz.joined().reduce(0, +))
+}
 
 
 func macierzNorma(macierz: [[Int]]) -> Double{      // 6.2.3
-    
     var suma: Double = 0
-    
     for i in 0..<macierz.count{
         for j in 0..<macierz[i].count {
             suma += pow(Double(macierz[i][j]),2)
@@ -69,6 +75,19 @@ func macierzNorma(macierz: [[Int]]) -> Double{      // 6.2.3
     return Double(suma).squareRoot()
 }
 
+//6.2.4
+
+func macierzMaksymalnyElementKolumny(macierz: [[Int]], kolumna: Int) -> Int{
+
+    var maxKolumna: Int = macierz[0][0]
+    for i in 0..<macierz.count{
+        if macierz[i][kolumna] > maxKolumna {
+            maxKolumna = macierz[i][kolumna]
+        }
+    }
+    
+    return maxKolumna
+}
 
 func macierzDiagonalna(macierz: [[Int]]) -> Bool{      //6.2.5
     var rows = macierz.count
@@ -95,17 +114,28 @@ func macierzPrzekatnaDominujacaGlowna(macierz: [[Int]]) -> Bool{    // 6.2.6
     return macierz[0][0] > suma
 }
 
-
+func macierzWyswietlanie(macierz: [[Int]]){
+    
+    for i in 0..<macierz.count{
+        for j in 0..<macierz[i].count{
+            print("\(macierz[i][j])", terminator: "   ")
+        }
+        print("\n")
+    }
+}
 
 
 func zad6_2() {
 
     let mac: [[Int]] = [[1, 2, 3], [4, 5, 6],[7,8,9]]
+    print(macierzWyswietlanie(macierz: mac))
     
-    print(macierzSymetryczna(macierz: mac))
-    print(macierzNorma(macierz: mac))
-    print(macierzDiagonalna(macierz: mac))
-    print(macierzPrzekatnaDominujacaGlowna(macierz: mac))
+    print("macierz symetryczna:  \(macierzSymetryczna(macierz: mac))")                                          // 6.2.1
+    print("macierz suma wierszy: \(macierzSumaWiersza(macierz: mac, wiersz: 0))")                               // 6.2.2
+    print("norma macierzy: \(macierzNorma(macierz: mac))")                                                      // 6.2.3
+    print("maksymalny element kolumny: \(macierzMaksymalnyElementKolumny(macierz: mac, kolumna: 0))")           //6.2.4
+    print("macierz diagolanla:  \(macierzDiagonalna(macierz: mac))")                                            // 6.2.5
+    print("macierz przekatna dominujaca glowna:  \(macierzPrzekatnaDominujacaGlowna(macierz: mac))")            // 6.2.6
     
     
 }
