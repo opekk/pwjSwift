@@ -109,12 +109,10 @@ func zad8_3(){
         let marka = readLine()!
         auta.insert(marka)
     }
-    
     print("\n wszystkie auta: ")
     for auto in auta{
         print(auto)
     }
-    
     print("podaj marke auta do usuniecia: ")
     let usunAuto = readLine()!
     if auta.contains(usunAuto) {auta.remove(usunAuto)}
@@ -124,8 +122,6 @@ func zad8_3(){
     for auto in auta{
         print(auto)
     }
-    
-    
 }
 
 
@@ -155,16 +151,13 @@ func zad8_4(){
     else{
         print("Student o podanym id i nazwisku nie istnieje \n")
     }
-    
     print(" Podaj id studenta")
     var szukanyStudentIDdoUsuniecia: String = readLine()!
     print("Podaj nazwisko studenta")
     var szukanyStudentNazwiskoDoUsuniecia: String = readLine()!
-        
     if(studenci[szukanyStudentIDdoUsuniecia] == szukanyStudentNazwisko){
         studenci.removeValue(forKey: szukanyStudentIDdoUsuniecia)
     }
-    
     print("lista studentow po usunieciu: \n")
     for stu in studenci{
         print("id studenta: \(stu.key), nazwisko studenta: \(stu.value)")
@@ -172,48 +165,83 @@ func zad8_4(){
 }
 
 func zad8_5(){
-    
-    struct Lot{
-        var miejsceWylotu: [String: String] = [:]
-        var miejsceDocelowe: [String: String] = [:]
-        var czasPodrozy: Int = 0
-        
-        func wyswietlanieLotow(){
-            print("Miejsce wylotu: \(miejsceWylotu)")
-            print("Miejsce docelowe: \(miejsceDocelowe)")
-            print("Czas podrozy: \(czasPodrozy)")
+    struct Lot {
+        var miejsceWylotu: [String: String]
+        var miejsceDocelowe: [String: String]
+        var czasPodrozy: Int
+
+        static func wczytajLoty() -> [Lot] {
+            print("Podaj liczbę lotów do wczytania:")
+            let liczbaLotow = Int(readLine() ?? "0") ?? 0
+            var loty: [Lot] = []
+
+            for i in 1...liczbaLotow {
+                print("\nWczytywanie danych dla lotu \(i):")
+                print("Podaj numer lotniska wylotu:")
+                let numerWylotu = readLine() ?? ""
+                print("Podaj nazwę lotniska wylotu:")
+                let nazwaWylotu = readLine() ?? ""
+
+                print("Podaj numer lotniska docelowego:")
+                let numerDocelowe = readLine() ?? ""
+                print("Podaj nazwę lotniska docelowego:")
+                let nazwaDocelowe = readLine() ?? ""
+
+                print("Podaj czas podróży (w minutach):")
+                let czasPodrozy = Int(readLine() ?? "0") ?? 0
+
+                loty.append(
+                    Lot(
+                        miejsceWylotu: ["Numer": numerWylotu, "Nazwa": nazwaWylotu],
+                        miejsceDocelowe: ["Numer": numerDocelowe, "Nazwa": nazwaDocelowe],
+                        czasPodrozy: czasPodrozy
+                    )
+                )
+            }
+
+            return loty
+        }
+        static func wypiszLot(lot: Lot) {
+            print("Miejsce wylotu: \(lot.miejsceWylotu["Numer"] ?? "") - \(lot.miejsceWylotu["Nazwa"] ?? "")")
+            print("Miejsce docelowe: \(lot.miejsceDocelowe["Numer"] ?? "") - \(lot.miejsceDocelowe["Nazwa"] ?? "")")
+            print("Czas podróży: \(lot.czasPodrozy) minut")
+        }
+
+        static func sredniCzasPodrozy(loty: [Lot]) -> Double {
+            let sumaCzasow = loty.reduce(0) { $0 + $1.czasPodrozy }
+            return Double(sumaCzasow) / Double(loty.count)
+        }
+
+        static func wypiszLotyDluzejNizSrednia(loty: [Lot]) {
+            let srednia = sredniCzasPodrozy(loty: loty)
+            print("\nLoty, które trwają dłużej niż średnia (\(srednia) minut):")
+            for lot in loty where Double(lot.czasPodrozy) > srednia {
+                wypiszLot(lot: lot)
+                print("--------------------")
+            }
+        }
+        static func usunLotyKrocejNizSrednia(loty: inout [Lot]) {
+            let srednia = sredniCzasPodrozy(loty: loty)
+            loty = loty.filter { Double($0.czasPodrozy) >= srednia }
+        }
+        static func wypiszLoty(loty: [Lot]) {
+            for lot in loty {
+                wypiszLot(lot: lot)
+                print("--------------------")
+            }
         }
     }
-    func wczytajDaneLotow() -> [Lot] {
-        print("Podaj liczbę lotów do wczytania:")
-        let liczbaLotow = Int(readLine() ?? "0") ?? 0
-        var loty: [Lot] = []
-        
-        for i in 1...liczbaLotow {
-            print("\nWczytywanie danych dla lotu \(i):")
-            print("Podaj numer lotniska wylotu:")
-            let numerWylotu = readLine() ?? ""
-            print("Podaj nazwę lotniska wylotu:")
-            let nazwaWylotu = readLine() ?? ""
-            
-            print("Podaj numer lotniska docelowego:")
-            let numerDocelowe = readLine() ?? ""
-            print("Podaj nazwę lotniska docelowego:")
-            let nazwaDocelowe = readLine() ?? ""
-            
-            print("Podaj czas podróży (w minutach):")
-            let czasPodrozy = Int(readLine() ?? "0") ?? 0
-            
-            loty.append(
-                Lot(
-                    miejsceWylotu: ["Numer": numerWylotu, "Nazwa": nazwaWylotu],
-                    miejsceDocelowe: ["Numer": numerDocelowe, "Nazwa": nazwaDocelowe],
-                    czasPodrozy: czasPodrozy
-                )
-            )
-        }
-        return loty
-    }    
+
+    func zad5(){
+        var loty = Lot.wczytajLoty()
+        print("\nWszystkie loty:")
+        Lot.wypiszLoty(loty: loty)
+        Lot.wypiszLotyDluzejNizSrednia(loty: loty)
+        print("\nUsuwanie lotów krótszych niż średnia...")
+        Lot.usunLotyKrocejNizSrednia(loty: &loty)
+        print("\nLoty po usunięciu krótszych niż średnia:")
+        Lot.wypiszLoty(loty: loty)
+    }
     
 }
 
