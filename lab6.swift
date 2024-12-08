@@ -50,9 +50,12 @@ func zad6_1() {
 }
 
 func macierzSymetryczna(macierz: [[Int]]) -> Bool{      //6.2.1
-    var rows = macierz.count
-    var cols = macierz[0].count
-    return rows == cols
+    for i in 0..<macierz.count{
+        for j in 0..<macierz[i].count{
+            if( macierz[i][j] != macierz[j][i]) { return false}
+        }
+    }
+    return true
 }
 
 //6.2.2
@@ -75,19 +78,22 @@ func macierzNorma(macierz: [[Int]]) -> Double{      // 6.2.3
     return Double(suma).squareRoot()
 }
 
-//6.2.4
 
-func macierzMaksymalnyElementKolumny(macierz: [[Int]], kolumna: Int) -> Int{
-
-    var maxKolumna: Int = macierz[0][0]
+func macierzMaksymalnyElementKolumny(macierz: [[Int]], kolumna: Int) -> [Int]{
+    var maxKolumnaArray: [Int] = []
+    var max = 0
     for i in 0..<macierz.count{
-        if macierz[i][kolumna] > maxKolumna {
-            maxKolumna = macierz[i][kolumna]
+        for j in 0..<macierz[i].count{
+            if macierz[i][j] > max{
+                max = [i][j]
+            }
+            maxKolumnaArray.append(max)
+            max = 0
         }
     }
-    
-    return maxKolumna
+    return maxKolumnaArray
 }
+
 
 func macierzDiagonalna(macierz: [[Int]]) -> Bool{      //6.2.5
     var rows = macierz.count
@@ -126,14 +132,39 @@ func macierzWyswietlanie(macierz: [[Int]]){
 
 
 func zad6_2() {
-
-    let mac: [[Int]] = [[1, 2, 3], [4, 5, 6],[7,8,9]]
-    print(macierzWyswietlanie(macierz: mac))
+    print("podaj ilosc wierszy: ")
+    let rows = Int(readLine()!)!
+    print("podaj ilosc kolumn: ")
+    let cols = Int(readLine()!)!
+    var mac: [[Int]] = Array(repeating: Array(repeating: 0, count: cols), count: rows)
+    print("1 - podaj elementy macierzy, 2 - wygeneruj losowo elementy tablicy ")
+    var wybor = Int(readLine()!)
     
+    switch wybor{
+    case 1:
+        for i in 0..<rows{
+            for j in 0..<cols{
+                var element: Int
+                print("podaj element: ")
+                element = Int(readLine()!)!
+                mac[i][j] = element
+            }
+        }
+    case 2:
+        for i in 0..<rows {
+            for j in 0..<cols{
+                var element = Int.random(in: 1...10)
+                mac[i][j] = element
+            }
+        }
+    default: print("nie ma takiej opcji")
+    }
+    
+    print(macierzWyswietlanie(macierz: mac))
     print("macierz symetryczna:  \(macierzSymetryczna(macierz: mac))")                                          // 6.2.1
     print("macierz suma wierszy: \(macierzSumaWiersza(macierz: mac, wiersz: 0))")                               // 6.2.2
     print("norma macierzy: \(macierzNorma(macierz: mac))")                                                      // 6.2.3
-    print("maksymalny element kolumny: \(macierzMaksymalnyElementKolumny(macierz: mac, kolumna: 0))")           //6.2.4
+    print("maksymalny element kolumny: \(macierzMaksymalnyElementKolumny(macierz: mac, kolumna: 0))")           // 6.2.4
     print("macierz diagolanla:  \(macierzDiagonalna(macierz: mac))")                                            // 6.2.5
     print("macierz przekatna dominujaca glowna:  \(macierzPrzekatnaDominujacaGlowna(macierz: mac))")            // 6.2.6
     
