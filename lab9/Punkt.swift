@@ -19,6 +19,14 @@ class Punkt{
         self.y = y
     }
     
+    func getX() -> Double{
+        return x
+    }
+    
+    func getY() -> Double{
+        return y
+    }
+    
     func obliczanieOdleglosci(Punkt: Punkt) -> Double{
         return sqrt(pow(Punkt.x - self.x, 2) + pow(Punkt.y - self.y, 2))
     }
@@ -56,11 +64,9 @@ class Punkt{
 }
 
 func PunktWzgledemKwadratu(p: Punkt, k: Double) -> Int{
-    
-    if p.x == k || p.y == k{
+    if p.getX() > k || p.getY() > k || p.getX() < -k || p.getY() < -k {
+        return 1
+    } else if p.getX() == k || p.getY() == k || p.getX() == -k || p.getY() == -k {
         return 0
-    }
-    
-    if p.x > k || p.y > k
-    
+    } else { return -1}
 }

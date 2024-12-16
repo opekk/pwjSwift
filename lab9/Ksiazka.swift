@@ -12,6 +12,10 @@ class Ksiazka{
         self.rokWydania = rokWydania
     }
     
+    func getLiczbaStron() -> Int{
+        return liczbaStron
+    }
+    
     func info(){
         print("Tytul: \(tytul), Autor: \(autor.info()), Liczba stron: \(liczbaStron), Rok wydania: \(rokWydania)")
     }
